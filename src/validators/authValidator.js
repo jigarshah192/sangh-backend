@@ -21,11 +21,12 @@ const updateUserValidator = Joi.object({
   charriProblem: Joi.string().required(),
   which: Joi.string().required(),
   aadharNo: Joi.string().required(),
+  profilePic: Joi.string().required()
 });
 
 const uploadImageValidator = Joi.object({
-  image: Joi.required(),
-  userId: Joi.string().required(),
+  fileName: Joi.string().required(),
+  fileType: Joi.string().required()
 });
 
 module.exports = {

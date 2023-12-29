@@ -1,6 +1,0 @@
-MONGODB_URL=mongodb+srv://dbuser:Knowledge2023@cluster0.o81dskl.mongodb.net/sangh
-PORT=8000
-S3_BUCKET_NAME=sangh-images
-AWS_ACCESS_KEY_ID=AKIAXRWBBHW2Z2ADAEQN
-AWS_SECRET_ACCESS_KEY=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
-AWS_REGION=ap-south-1

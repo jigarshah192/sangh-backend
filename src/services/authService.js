@@ -33,26 +33,20 @@ const updateUser = async (userData) => {
   user.charriProblem = userData.charriProblem;
   user.which = userData.which;
   user.aadharNo = userData.aadharNo;
+  user.profilePic = userData.profilePic;
   return await user.save();
 };
 
-const uploadFile = async (file, userId) => {
-  console.log("SSSSS", file.mimetype);
-  const key = userId;
-  console.log("SSSAS", file.name);
+const uploadFile = async (fileName, fileType) => {
   const putParams = {
     Bucket: process.env.S3_BUCKET_NAME,
-    Key: key,
+    Key: fileName,
     // Body: file.buffer,
-    ContentType: file.name,
+    ContentType: fileType,
     // ACL: 'public-read',
   };
-  // const command = new PutObjectCommand(putParams);
-  // await s3.send(command);
-
-  // const url = await getSignedUrl(s3, command, { expiresIn: 3600 }); // Expires in 1 hour
-  // return url;
-  return {};
+  const command = new PutObjectCommand(putParams);
+  return getSignedUrl(s3, command, { expiresIn: 3600 });
 }
 
 module.exports = {

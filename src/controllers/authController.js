@@ -1,7 +1,7 @@
 const authService = require('@services/authService');
 const multer = require('multer');
-const { registerValidator, getUserValidator, updateUserValidator, uploadFile } = require('@validators/authValidator');
-
+const { registerValidator, getUserValidator, updateUserValidator, uploadImageValidator } = require('@validators/authValidator');
+const { uploadFile} = require('@services/authService');
 const upload = multer({ storage: multer.memoryStorage() });
 
 const register = async (req, res) => {
@@ -44,17 +44,15 @@ const updateUser = async (req, res) => {
 };
 
 const uploadImage = async (req, res) => {
-  // await uploadImageValidator.validateAsync({ ...req.body, ...req.file });
   try {
-    // Validate the file metadata
-    // await fileSchema.validateAsync({
-    //   originalname: req.file.originalname,
-    //   mimetype: req.file.mimetype,
-    //   size: req.file.size
-    // });
 
-    const url = await authService.uploadFile(req.file, req.body.userId);
-    res.status(200).json({ url });
+    await uploadImageValidator.validateAsync(req.body)
+  
+    const {fileName, fileType} = req.body
+    const path = `${fileName}.${fileType}`
+    const preSignedUrl = await uploadFile(path, fileType);
+
+    res.status(200).json({ preSignedUrl });
   } catch (error) {
     console.error(error);
     res.status(400).json({ error: error.message });

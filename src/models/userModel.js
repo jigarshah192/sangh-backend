@@ -11,7 +11,8 @@ const UserSchema = new mongoose.Schema({
   aadharNo: { type: String },
   whatsappNumber: { type: String, required: true },
   coming: { type: Boolean, required: true },
-  startingFrom: { type: String, required: true, enum: ['Ningala', 'Talaja'] }
+  startingFrom: { type: String, required: true, enum: ['Ningala', 'Talaja'] },
+  profilePic: { type: String }
 });
 
 const User = mongoose.model('User', UserSchema);
