@@ -21,7 +21,7 @@ app.use(helmet());
 
 // Enable CORS with various options
 app.use(cors({
-  origin: 'http://localhost:3000', // Adjust to match the domain of your client app
+  origin: ['http://localhost:3000', 'https://app.lls-chharipalitsangh.in'],
 }));
 
 // Log HTTP requests

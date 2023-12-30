@@ -16,12 +16,18 @@ const updateUserValidator = Joi.object({
   id: Joi.string().required(),
   address: Joi.string().required(),
   city: Joi.string().valid('Bhavnagar', 'Ahmedabad', 'Surat', 'Mumbai', 'Vadodara').required(),
-  gender: Joi.string().valid('Male', 'Female').required(),
+  gender: Joi.string().valid('male', 'female').required(),
   tapashcharya: Joi.string().required(),
   charriProblem: Joi.string().required(),
-  which: Joi.string().required(),
+  which: Joi.string().optional(),
+  photoCopyType: Joi.string().required(),
+  profilePic: Joi.string().optional(),
+  aadharCopyType: Joi.string().required(),
   aadharNo: Joi.string().required(),
-  profilePic: Joi.string().required()
+  profilePic: Joi.string().required(),
+  age: Joi.number().required(),
+  medicalIssue: Joi.string().optional(),
+  alternateMobile: Joi.string().optional(),
 });
 
 const uploadImageValidator = Joi.object({
