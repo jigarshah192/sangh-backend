@@ -4,7 +4,7 @@ const UserSchema = new mongoose.Schema({
   name: { type: String, required: true },
   address: { type: String },
   city: { type: String, enum: ['Bhavnagar', 'Ahmedabad', 'Surat', 'Mumbai', 'Vadodara'] },
-  gender: { type: String, enum: ['male', 'female'] },
+  gender: { type: String, enum: ['Male', 'Female'] },
   tapashcharya: { type: String },
   charriProblem: { type: String },
   which: { type: String },
