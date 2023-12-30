@@ -34,6 +34,10 @@ const updateUser = async (userData) => {
   user.which = userData.which;
   user.aadharNo = userData.aadharNo;
   user.profilePic = userData.profilePic;
+  user.medicalIssue = userData.medicalIssue;
+  user.age = userData.age;
+  user.photoCopyType = userData.photoCopyType;
+  user.aadharCopyType = userData.aadharCopyType;
   return await user.save();
 };
 
