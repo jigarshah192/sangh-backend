@@ -59,10 +59,22 @@ const uploadImage = async (req, res) => {
   }
 };
 
+const sendWhatsAppMessage = async (req, res) => {
+  try {
+    // await updateUserValidator.validateAsync(req.body);
+
+    const response = await authService.sendWhatsAppMessage(req.body);
+    return res.status(200).json(response);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 module.exports = {
   register,
   getUser,
   updateUser,
   uploadImage,
   upload,
+  sendWhatsAppMessage
 };

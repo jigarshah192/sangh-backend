@@ -1,5 +1,7 @@
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
+const axios = require('axios');
+const FormData = require('form-data');
 
 const s3 = new S3Client(
   {
@@ -53,9 +55,45 @@ const uploadFile = async (fileName, fileType) => {
   return getSignedUrl(s3, command, { expiresIn: 3600 });
 }
 
+const sendWhatsAppMessage = async ({ templateId, variables }) => {
+  const users = await User.find({coming: true});
+  console.log('users', users.length);
+  for (const user of users) {
+    const variables = [user.name, user._id.toString()];
+    // console.log("test", user.whatsappNumber, user.name, user._id.toString());
+    await sendMessage(user.whatsappNumber, templateId, variables);
+  }
+  return {};
+}
+
+const sendMessage = async (phoneNumber, templateId, variables) => {
+  const form = new FormData();
+  form.append('appkey', process.env.WHATSAPP_APP_KEY);
+  form.append('authkey', process.env.WHATSAPP_AUTH_KEY);
+  form.append('to', phoneNumber);
+  form.append('template_id', templateId);
+  form.append('variables[{1}]', variables[0]);
+  form.append('variables[{2}]', variables[1]);
+
+  console.log('Form:', form);
+
+  try {
+      // Send the request
+      const response = await axios.post(`${process.env.WHATSAPP_APP_URL}/api/create-message`, form, {
+          headers: form.getHeaders()
+      });
+
+      console.log('Response:', response.data);
+  } catch (error) {
+      console.error('Error:', error);
+  }
+}
+
+
 module.exports = {
   register,
   getUser,
   updateUser,
   uploadFile,
+  sendWhatsAppMessage
 };
