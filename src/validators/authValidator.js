@@ -17,7 +17,7 @@ const updateUserValidator = Joi.object({
   address: Joi.string().required(),
   city: Joi.string().valid('Bhavnagar', 'Ahmedabad', 'Surat', 'Mumbai', 'Vadodara').required(),
   gender: Joi.string().valid('Male', 'Female').required(),
-  tapashcharya: Joi.string().required(),
+  tapashcharya: Joi.string().optional(),
   charriProblem: Joi.string().required(),
   which: Joi.string().optional(),
   photoCopyType: Joi.string().required(),
