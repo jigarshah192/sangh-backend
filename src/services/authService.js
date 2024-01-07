@@ -15,6 +15,7 @@ const s3 = new S3Client(
 const User = require('@models/userModel');
 
 const register = async (userData) => {
+  userData.onhold = true;
   const user = new User(userData);
   return await user.save();
 };

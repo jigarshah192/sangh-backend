@@ -31,7 +31,7 @@ const getUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   try {
-    await updateUserValidator.validateAsync(req.body);
+    // await updateUserValidator.validateAsync(req.body);
 
     const user = await authService.updateUser(req.body);
     if (!user) {

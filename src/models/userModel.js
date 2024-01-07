@@ -17,8 +17,8 @@ const UserSchema = new mongoose.Schema({
   age: { type: Number, min: 1, max: 100 },
   photoCopyType: { type: String },
   aadharCopyType: { type: String },
-  medicalIssue: { type: String },
   alternateMobile: { type: String },
+  onhold: { type: Boolean, default: true },
 });
 
 const User = mongoose.model('User', UserSchema);
