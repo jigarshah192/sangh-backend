@@ -90,11 +90,21 @@ const sendMessage = async (phoneNumber, templateId, variables) => {
   }
 }
 
+const getUsers = async () => {
+  try {
+    const users = await User.find({});
+    return users;
+  } catch (err) {
+    throw err;
+  }
+};
+
 
 module.exports = {
   register,
   getUser,
   updateUser,
   uploadFile,
-  sendWhatsAppMessage
+  sendWhatsAppMessage,
+  getUsers
 };

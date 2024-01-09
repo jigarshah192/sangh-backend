@@ -70,11 +70,21 @@ const sendWhatsAppMessage = async (req, res) => {
   }
 };
 
+const getUsers = async (req, res) => {
+  try {
+    const response = await authService.getUsers(req.body);
+    return res.status(200).json(response);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 module.exports = {
   register,
   getUser,
   updateUser,
   uploadImage,
   upload,
-  sendWhatsAppMessage
+  sendWhatsAppMessage,
+  getUsers
 };
